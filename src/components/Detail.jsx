@@ -1,9 +1,13 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { FaStar, FaTv, FaWifi, FaSnowflake, FaThermometerHalf, FaBath, FaUserFriends, FaRulerCombined, FaBed } from 'react-icons/fa';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { 
+  FaStar, FaTv, FaWifi, FaSnowflake, FaThermometerHalf, 
+  FaBath, FaUserFriends, FaRulerCombined, FaBed 
+} from 'react-icons/fa';
 
 const Detail = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { title, location: loc, price, image } = location.state || {};
 
   const roomImages = [
@@ -11,6 +15,12 @@ const Detail = () => {
     'https://i.pinimg.com/564x/2b/4a/38/2b4a3864fc2b14352ad68a2fdc8430f5.jpg',
     'https://i.pinimg.com/564x/99/2e/2e/992e2e9c0b9e3123f03ecff109a47c38.jpg'
   ];
+
+  const handleBooking = () => {
+    navigate('/payment', {
+      state: { title, price }
+    });
+  };
 
   return (
     <div className="container py-5">
@@ -38,7 +48,7 @@ const Detail = () => {
             <span className="text-warning"><FaStar /> <FaStar /> <FaStar /> <FaStar /> <FaStar /></span>
             <span className="ms-2">4.9 <span className="text-muted">(20 Review)</span></span>
           </p>
-          <h5 className="fw-bold text-primary">{price} <span className="fw-normal text-dark"></span></h5>
+          <h5 className="fw-bold text-primary">{price} <span className="fw-normal text-dark">/ Night</span></h5>
           <p className="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
 
           <h6 className="fw-bold">Room Feature</h6>
@@ -56,7 +66,9 @@ const Detail = () => {
           <h6 className="fw-bold">Children and extra beds</h6>
           <p className="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
 
-          <button className="btn btn-dark rounded-pill px-4">Booking</button>
+          <button className="btn btn-dark rounded-pill px-4" onClick={handleBooking}>
+            Booking
+          </button>
         </div>
       </div>
     </div>
