@@ -6,8 +6,12 @@ import Payment from '../pages/Payment';
 import Confirmation from '../pages/Confirmation';
 import Invoice from '../pages/Invoice';
 import Login from '../pages/Login';
-
-
+import Register from '../pages/Register';
+import ForgotPasswordPage from '../pages/ForgotPassword'; 
+import ResetPassword from '../pages/ResetPassword';
+import PasswordUpdated from "../pages/PasswordUpdated";
+import NotFoundPage from "../pages/NotFoundPage";
+import ForbiddenPage from "../pages/ForbiddenPage";
 
 export default function AppRoutes() {
   return (
@@ -16,10 +20,15 @@ export default function AppRoutes() {
       <Route path="/our-villa" element={<OurVilla />} />
       <Route path="/villa-detail" element={<DetailsVilla />} />
       <Route path="/payment" element={<Payment />} />
-      <Route path="/Confirmation" element={<Confirmation />} />
-      <Route path="/Invoice" element={<Invoice />} />
+      <Route path="/confirmation" element={<Confirmation />} />
+      <Route path="/invoice" element={<Invoice />} />
       <Route path="/login" element={<Login />} />
-
+      <Route path="/register" element={<Register />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} /> 
+      <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/password-updated" element={<PasswordUpdated />} />
+      <Route path="*" element={<NotFoundPage />} />
+      <Route path="/forbidden" element={<ForbiddenPage />} />
 
     </Routes>
   );

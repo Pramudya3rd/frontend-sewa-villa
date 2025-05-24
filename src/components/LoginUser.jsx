@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import LoginImg from "../assets/login.jpg";
 import "../styles/login.css";
 
@@ -18,7 +19,7 @@ const LoginPage = () => {
     if (!email || !password) {
       setError("Email dan password harus diisi.");
     } else {
-      setError(""); 
+      setError("");
       console.log("Logging in with:", { email, password });
     }
   };
@@ -35,7 +36,10 @@ const LoginPage = () => {
         }}
       />
 
-      <div className="right-side d-flex justify-content-center align-items-center p-4" style={{ flex: 1 }}>
+      <div
+        className="right-side d-flex justify-content-center align-items-center p-4"
+        style={{ flex: 1 }}
+      >
         <div className="login-form w-100" style={{ maxWidth: "400px" }}>
           <h3 className="text-center mb-4 fw-bold text-dark">LOGIN</h3>
 
@@ -47,7 +51,9 @@ const LoginPage = () => {
 
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
-              <label htmlFor="email" className="form-label">Email</label>
+              <label htmlFor="email" className="form-label">
+                Email
+              </label>
               <input
                 type="email"
                 className="form-control rounded-3"
@@ -59,11 +65,19 @@ const LoginPage = () => {
             </div>
 
             <div className="mb-2">
-              <label htmlFor="password" className="form-label">Password</label>
-              <div style={{ position: "relative", display: "flex", alignItems: "center" }}>
+              <label htmlFor="password" className="form-label">
+                Password
+              </label>
+              <div
+                style={{
+                  position: "relative",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
                 <input
                   type={showPassword ? "text" : "password"}
-                  className="form-control rounded-3"
+                  className="form-control rounded-3 pe-5"
                   id="password"
                   placeholder="Enter your password"
                   value={password}
@@ -77,20 +91,37 @@ const LoginPage = () => {
                     right: "1rem",
                     transform: "translateY(-50%)",
                     cursor: "pointer",
-                    color: "#6c757d"
+                    color: "#6c757d",
                   }}
                 >
-                  <i className={`bi ${showPassword ? "bi-eye-slash" : "bi-eye"}`}></i>
+                  <i
+                    className={`bi ${
+                      showPassword ? "bi-eye-slash" : "bi-eye"
+                    }`}
+                  ></i>
                 </span>
               </div>
             </div>
 
             <div className="text-end mb-3">
-              <a href="#" style={{ fontSize: "0.9rem", color: "#34495e" }}>Forgot Password?</a>
+              <Link
+                to="/forgot-password"
+                style={{
+                  fontSize: "0.9rem",
+                  color: "#34495e",
+                  textDecoration: "none",
+                }}
+              >
+                Forgot Password?
+              </Link>
             </div>
 
             <div className="d-grid">
-              <button type="submit" className="btn btn-lg rounded-3 text-white" style={{ backgroundColor: "#5e869e" }}>
+              <button
+                type="submit"
+                className="btn btn-lg rounded-3 text-white"
+                style={{ backgroundColor: "#5e869e" }}
+              >
                 Login
               </button>
             </div>
