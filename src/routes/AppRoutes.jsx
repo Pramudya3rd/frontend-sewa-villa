@@ -10,6 +10,7 @@ import Register from '../pages/Register';
 import ForgotPasswordPage from '../pages/ForgotPassword'; 
 import ResetPassword from '../pages/ResetPassword';
 import PasswordUpdated from "../pages/PasswordUpdated";
+import ProfilePage from "../pages/ProfilePage";
 import NotFoundPage from "../pages/NotFoundPage";
 import ForbiddenPage from "../pages/ForbiddenPage";
 
@@ -24,6 +25,7 @@ export default function AppRoutes() {
       <Route path="/invoice" element={<Invoice />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/profile" element={<ProfilePage />} />
       <Route path="/forgot-password" element={<ForgotPasswordPage />} /> 
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/password-updated" element={<PasswordUpdated />} />
