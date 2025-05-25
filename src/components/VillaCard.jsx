@@ -1,28 +1,45 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../styles/VillaCard.css';
+import { FaStar } from 'react-icons/fa';
 
-const VillaCard = ({ title, location, price, image }) => {
+const VillaCard = ({ title, location, price, image, onBookNow }) => {
   const navigate = useNavigate();
 
   const handleBookNow = () => {
-    // Navigasi ke halaman detail, bisa disesuaikan path-nya
-    navigate('/villa-detail', { state: { title, location, price, image } });
+    if (onBookNow) {
+      onBookNow(); // pakai fungsi yang dikirim dari luar
+    } else {
+      navigate('/our-villa'); // fallback default
+    }
   };
 
   return (
-    <div className="col-md-4">
-      <div className="card villa-card border rounded-4 shadow-sm">
-        <img src={image} className="card-img-top rounded-top-4" alt={title} />
-        <div className="card-body">
-          <h5 className="card-title">{title}</h5>
-          <p className="text-muted small">{location}</p>
-          <p className="mb-1">
-            <span className="text-warning">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-            4.9 <span className="text-muted">(20 Review)</span>
-          </p>
-          <p className="mb-1 small">Start From</p>
-          <p className="fw-bold">{price}</p>
-          <button className="btn btn-light book-btn" onClick={handleBookNow}>
+    <div className="col-md-4 d-flex">
+      <div className="card villa-card border-0 shadow-sm rounded-4 flex-fill">
+        <img
+          src={image}
+          className="card-img-top rounded-top-4 villa-image"
+          alt={title}
+        />
+        <div className="card-body d-flex flex-column">
+          <h5 className="card-title fw-semibold">{title}</h5>
+          <p className="text-muted mb-2">{location}</p>
+
+          <div className="mb-2">
+            <span className="text-warning">
+              <FaStar /> <FaStar /> <FaStar /> <FaStar /> <FaStar />
+            </span>
+            <small className="text-muted ms-2">4.9 (20 Reviews)</small>
+          </div>
+
+          <p className="mb-1 small text-muted">Start From</p>
+          <p className="fw-bold fs-6">{price}</p>
+
+          <button
+            className="btn custom-btn rounded-pill mt-3 w-100"
+            onClick={handleBookNow}
+          >
             Book Now
           </button>
         </div>

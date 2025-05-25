@@ -1,19 +1,18 @@
 import React from 'react';
 import NavbarProfile from '../components/NavbarProfile';
 import StepProgress from '../components/StepProgress';
-import PaymentPage from '../components/PaymentPage';
+import VillaBookingCard from '../components/VillaBookingCard';
 
 
 
 
 
-
-export default function Payment() {
+export default function Booking() {
   return (
     <>
       <NavbarProfile />
         <StepProgress currentStep={1} />
-        <PaymentPage />
+      <VillaBookingCard />
     </>
   );
 }

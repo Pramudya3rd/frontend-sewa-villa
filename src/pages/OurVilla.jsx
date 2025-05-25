@@ -4,12 +4,14 @@ import FilterBar from '../components/FilterBar';
 import ListVilla from '../components/ListVilla';
 
 
-export default function Home() {
+
+export default function OurVilla() {
   return (
     <>
       <NavbarProfile />
        <FilterBar />
       <ListVilla />
+
     </>
   );
 }
