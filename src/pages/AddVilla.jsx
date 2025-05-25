@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/NavbarProfile";
 import "../styles/add-villa.css";
 
 const AddVilla = () => {
@@ -12,10 +12,14 @@ const AddVilla = () => {
     image: null,
   });
 
+  const [previewImage, setPreviewImage] = useState(null);
+
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    if (name === "image") {
-      setFormData({ ...formData, image: files[0] });
+    if (name === "image" && files.length > 0) {
+      const file = files[0];
+      setFormData({ ...formData, image: file });
+      setPreviewImage(URL.createObjectURL(file));
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -24,7 +28,7 @@ const AddVilla = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     alert("Villa data uploaded!");
-    // Submit logic here
+    // logicnya disini
   };
 
   return (
@@ -34,8 +38,14 @@ const AddVilla = () => {
         <form onSubmit={handleSubmit} className="add-villa-form">
           <div className="upload-section">
             <label>UPLOAD IMAGES</label>
-            <div className="image-placeholder" />
-            <input type="file" name="image" onChange={handleChange} />
+            <div className="image-placeholder">
+              {previewImage ? (
+                <img src={previewImage} alt="Villa Preview" />
+              ) : (
+                <span>No image selected</span>
+              )}
+            </div>
+            <input type="file" name="image" onChange={handleChange} accept="image/*" />
           </div>
 
           <div className="details-section">
@@ -77,14 +87,13 @@ const AddVilla = () => {
                 onChange={handleChange}
               />
             </div>
+            <div className="inline-inputs">
+              <button type="submit" className="upload-btn full-width-btn">
+                Upload
+              </button>
+            </div>
           </div>
         </form>
-      </div>
-
-      <div className="upload-btn-wrapper">
-        <button type="submit" className="upload-btn" onClick={handleSubmit}>
-          Upload
-        </button>
       </div>
     </>
   );

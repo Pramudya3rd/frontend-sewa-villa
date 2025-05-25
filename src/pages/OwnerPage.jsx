@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // ✅ Tambahkan ini
+import { useNavigate } from "react-router-dom"; 
 import Navbar from "../components/NavbarProfile";
 import "../styles/owner.css";
 import { FiEdit, FiTrash2, FiEye } from "react-icons/fi";
@@ -24,7 +24,7 @@ const villaList = [
 
 const OwnerDashboard = () => {
   const [activeMenu, setActiveMenu] = useState("manage");
-  const navigate = useNavigate(); // ✅
+  const navigate = useNavigate(); 
 
   const handleAddVilla = () => {
     navigate("/add-villa");
