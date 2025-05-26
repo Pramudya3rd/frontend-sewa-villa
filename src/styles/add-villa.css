@@ -72,6 +72,61 @@
 .inline-inputs {
   display: flex;
   gap: 16px;
+  align-items: stretch;
+}
+
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.features-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f2f2f2;
+  padding: 6px 10px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+}
+
+.features-list button {
+  background: none;
+  border: none;
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.feature-input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  height: 50px;
+  box-sizing: border-box;
+}
+
+.add-feature-btn {
+  height: 50px;
+  padding: 0 20px;
+  background-color: #5c8196;
+  color: white;
+  border: 1px solid #5c8196;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.2s ease-in-out;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-feature-btn:hover {
+  background-color: #4a6a7e;
 }
 
 .upload-btn {
@@ -93,3 +148,4 @@
   width: 100%;
   padding: 12px;
 }
+
