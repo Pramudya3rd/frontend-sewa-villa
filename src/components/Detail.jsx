@@ -30,7 +30,7 @@ const Detail = () => {
   return (
     <div className="container py-5">
       <div className="row g-5">
-        {/* Gambar utama dan thumbnail */}
+        {/* Main image and thumbnails */}
         <div className="col-md-6">
           <img src={image} alt={title} className="img-fluid rounded-4 mb-3" />
           <div className="row g-3">
@@ -47,7 +47,7 @@ const Detail = () => {
           </div>
         </div>
 
-        {/* Informasi Detail Villa */}
+        {/* Villa Detail Info */}
         <div className="col-md-6">
           <h3 className="fw-bold">{title}</h3>
           <p className="mb-2">
@@ -55,40 +55,40 @@ const Detail = () => {
               {[...Array(5)].map((_, i) => <FaStar key={i} />)}
             </span>
             <span className="ms-2">
-              4.9 <span className="text-muted">(20 Review)</span>
+              4.9 <span className="text-muted">(20 Reviews)</span>
             </span>
           </p>
           <h5 className="fw-bold text-dark mb-3">
-            Rp. {price.toLocaleString('id-ID')} <span className="fw-normal text-muted">/ Night</span>
+            Rp. {price.toLocaleString('id-ID')} <span className="fw-normal text-muted">/ night</span>
           </h5>
           <p className="text-muted">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+            Experience ultimate relaxation in a luxury villa surrounded by tropical scenery. Ideal for families, couples, or anyone looking for a peaceful getaway with complete amenities.
           </p>
 
-          <h6 className="fw-bold mt-4 mb-2">Room Feature</h6>
+          <h6 className="fw-bold mt-4 mb-2">Room Features</h6>
           <div className="row row-cols-2 mb-3 text-muted">
             <div className="col mb-2"><FaTv className="me-2" />TV</div>
             <div className="col mb-2"><FaWifi className="me-2" />Free Wifi</div>
             <div className="col mb-2"><FaSnowflake className="me-2" />Air Conditioner</div>
             <div className="col mb-2"><FaThermometerHalf className="me-2" />Heater</div>
-            <div className="col mb-2"><FaBath className="me-2" />Bathroom</div>
-            <div className="col mb-2"><FaUserFriends className="me-2" />Guest: 6</div>
-            <div className="col mb-2"><FaRulerCombined className="me-2" />Size: 24m</div>
-            <div className="col mb-2"><FaBed className="me-2" />Bed Type: One bed</div>
+            <div className="col mb-2"><FaBath className="me-2" />Private Bathroom</div>
+            <div className="col mb-2"><FaUserFriends className="me-2" />Max Guests: 6</div>
+            <div className="col mb-2"><FaRulerCombined className="me-2" />Size: 24m²</div>
+            <div className="col mb-2"><FaBed className="me-2" />Bed Type: One King Bed</div>
           </div>
 
-          <h6 className="fw-bold mt-4 mb-2">Children and extra beds</h6>
+          <h6 className="fw-bold mt-4 mb-2">Children and Extra Beds</h6>
           <p className="text-muted mb-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+            Children are welcome to stay. Extra beds are available upon request and may incur additional charges.
           </p>
 
           <button 
             className="btn rounded-pill text-white w-100 py-2"
             style={{ backgroundColor: '#5a7684' }}
             onClick={handleBooking}
-        >
-            Booking
-         </button>
+          >
+            Book Now
+          </button>
         </div>
       </div>
     </div>

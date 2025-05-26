@@ -12,11 +12,24 @@ const Contact = () => (
       <div className="col-md-8">
         <form className="contact-form">
           <div className="row g-3">
-            <div className="col-md-6"><input type="text" className="form-control" placeholder="FULL NAME" /></div>
-            <div className="col-md-6"><input type="email" className="form-control" placeholder="EMAIL" /></div>
-            <div className="col-md-6"><input type="text" className="form-control" placeholder="PERSONS" /></div>
-            <div className="col-md-6"><input type="text" className="form-control" placeholder="MM/DD/YY" /></div>
-            <div className="col-12"><textarea className="form-control" rows="3" placeholder="MESSAGE"></textarea></div>
+            <div className="col-md-6">
+              <input type="text" className="form-control" placeholder="FULL NAME" />
+            </div>
+            <div className="col-md-6">
+              <input type="email" className="form-control" placeholder="EMAIL" />
+            </div>
+            <div className="col-md-6">
+              <input type="text" className="form-control" placeholder="PERSONS" />
+            </div>
+            <div className="col-md-6">
+              <input type="text" className="form-control" placeholder="MM/DD/YY" />
+            </div>
+            <div className="col-12">
+              <textarea className="form-control" rows="3" placeholder="MESSAGE"></textarea>
+            </div>
+            <div className="col-12 text-end">
+              <button type="submit" className="btn btn-primary px-4">Send</button>
+            </div>
           </div>
         </form>
       </div>

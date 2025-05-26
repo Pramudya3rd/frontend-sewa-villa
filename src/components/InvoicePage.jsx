@@ -32,10 +32,6 @@ const InvoicePage = () => {
             <span className="label">Check-Out</span>
             <span className="value"><strong>20 June 2025</strong></span>
           </div>
-          <div className="reservation-row">
-            <span className="label">Type</span>
-            <span className="value"><strong>Deluxe</strong></span>
-          </div>
         </div>
 
         <div className="price-summary">
