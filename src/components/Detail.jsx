@@ -1,14 +1,19 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { 
-  FaStar, FaTv, FaWifi, FaSnowflake, FaThermometerHalf, 
-  FaBath, FaUserFriends, FaRulerCombined, FaBed 
+import {
+  FaStar, FaTv, FaWifi, FaSnowflake, FaThermometerHalf,
+  FaBath, FaUserFriends, FaRulerCombined, FaBed
 } from 'react-icons/fa';
 
 const Detail = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { title, location: loc, price, image } = location.state || {};
+  const { title, location: loc, price, image } = location.state || {
+    title: "De Santika Nirwana",
+    location: "Ubud, Bali",
+    price: 5000000,
+    image: 'https://i.pinimg.com/736x/89/c1/df/89c1dfaf3e2bf035718cf2a76a16fd38.jpg'
+  };
 
   const roomImages = [
     'https://i.pinimg.com/736x/a8/bc/50/a8bc50298db283746524f3c82bbd9465.jpg',
@@ -25,7 +30,7 @@ const Detail = () => {
   return (
     <div className="container py-5">
       <div className="row g-5">
-        {/* Gambar utama dan gambar tambahan */}
+        {/* Gambar utama dan thumbnail */}
         <div className="col-md-6">
           <img src={image} alt={title} className="img-fluid rounded-4 mb-3" />
           <div className="row g-3">
@@ -42,7 +47,7 @@ const Detail = () => {
           </div>
         </div>
 
-        {/* Konten detail kanan */}
+        {/* Informasi Detail Villa */}
         <div className="col-md-6">
           <h3 className="fw-bold">{title}</h3>
           <p className="mb-2">
@@ -54,7 +59,7 @@ const Detail = () => {
             </span>
           </p>
           <h5 className="fw-bold text-dark mb-3">
-            Rp. 5.000.000{price?.toLocaleString('id-ID')} <span className="fw-normal text-muted">/ Night</span>
+            Rp. {price.toLocaleString('id-ID')} <span className="fw-normal text-muted">/ Night</span>
           </h5>
           <p className="text-muted">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
@@ -78,12 +83,12 @@ const Detail = () => {
           </p>
 
           <button 
-            className="btn rounded-pill px-4 text-white"
+            className="btn rounded-pill text-white w-100 py-2"
             style={{ backgroundColor: '#5a7684' }}
             onClick={handleBooking}
-          >
+        >
             Booking
-          </button>
+         </button>
         </div>
       </div>
     </div>
