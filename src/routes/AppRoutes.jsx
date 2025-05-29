@@ -21,6 +21,8 @@ import OwnerDashboard from "../pages/OwnerPage";
 import AddVilla from "../pages/AddVilla"
 import NotFoundPage from "../pages/NotFoundPage";
 import ForbiddenPage from "../pages/ForbiddenPage";
+import Admin from "../pages/Admin";
+
 
 export default function AppRoutes() {
   return (
@@ -47,6 +49,8 @@ export default function AppRoutes() {
       <Route path="/password-updated" element={<PasswordUpdated />} />
       <Route path="*" element={<NotFoundPage />} />
       <Route path="/forbidden" element={<ForbiddenPage />} />
+      <Route path="/admin-page" element={<Admin />} />
+
     </Routes>
   );
 }
