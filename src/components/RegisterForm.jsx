@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import RegisterImg from "../assets/Register.png"; 
+import RegisterImg from "../assets/Register.png";
+import { useNavigate } from "react-router-dom";
 import "../styles/register.css"; 
 
 const RegisterPage = () => {
@@ -21,10 +22,14 @@ const RegisterPage = () => {
     setShowPassword((prev) => !prev);
   };
 
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Registering with:", form);
     // lanjut nantii fetch/axios post ke backend di sini 
+
+    navigate("/login");
   };
 
   return (
