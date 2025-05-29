@@ -5,7 +5,7 @@ const InvoicePage = () => {
   return (
     <div className="invoice-container">
       <div className="invoice-box">
-        <h2 className="invoice-title">RESERVATION SUMMERY</h2>
+        <h2 className="invoice-title">RESERVATION SUMMARY</h2>
 
         <div className="reservation-details">
           <div className="reservation-row">
