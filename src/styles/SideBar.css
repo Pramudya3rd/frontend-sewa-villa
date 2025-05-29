@@ -93,3 +93,47 @@ body {
   border: 1px solid #eaeaea;
   border-radius: 10px;
 }
+
+.user-table {
+  margin: 20px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-table h4 {
+  margin-bottom: 16px;
+  font-weight: bold;
+}
+
+.user-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.user-table th,
+.user-table td {
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.btn-approve {
+  background-color: #a6d3ff;
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 999px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.btn-reject {
+  background-color: #f17b7b;
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+}

@@ -24,6 +24,8 @@ import EditVilla from "../pages/EditVilla"
 import NotFoundPage from "../pages/NotFoundPage";
 import ForbiddenPage from "../pages/ForbiddenPage";
 import Admin from "../pages/Admin";
+import ManageOwner from "../pages/ManageOwner";
+
 
 
 export default function AppRoutes() {
@@ -54,6 +56,7 @@ export default function AppRoutes() {
       <Route path="*" element={<NotFoundPage />} />
       <Route path="/forbidden" element={<ForbiddenPage />} />
       <Route path="/admin-page" element={<Admin />} />
+      <Route path="/manage-owner" element={<ManageOwner />} />
 
     </Routes>
   );
