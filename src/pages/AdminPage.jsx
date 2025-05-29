@@ -92,7 +92,6 @@ const AdminDashboard = () => {
               </table>
             </div>
           )}
-
           {activeMenu === "profile" && (
             <div>
               <h2>Profile Section</h2>

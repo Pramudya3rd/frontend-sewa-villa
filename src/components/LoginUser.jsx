@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; // ✅ Tambahkan useNavigate
+import { Link, useNavigate } from "react-router-dom"; 
 import LoginImg from "../assets/login.jpg";
 import "../styles/login.css";
 
@@ -9,7 +9,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const navigate = useNavigate(); // ✅ Inisialisasi navigate
+  const navigate = useNavigate(); 
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -24,8 +24,7 @@ const LoginPage = () => {
       setError("");
       console.log("Logging in with:", { email, password });
 
-      // ✅ Arahkan ke halaman homepage
-      navigate("/homepage");
+      navigate("/");
     }
   };
 
@@ -129,6 +128,16 @@ const LoginPage = () => {
               >
                 Login
               </button>
+
+              <div className="text-center mt-3">
+                <span style={{ fontSize: "0.9rem", color: "#6c757d" }}>
+                  Don’t have an account?{" "}
+                  <Link to="/register" style={{ color: "#34495e", textDecoration: "none" }}>
+                    Register here
+                  </Link>
+                </span>
+              </div>
+
             </div>
           </form>
         </div>
