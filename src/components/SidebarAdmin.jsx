@@ -9,6 +9,10 @@ const Sidebar = ({ setActiveMenu }) => {
     <div className="sidebar">
       <div className="logo">LOGO</div>
 
+      <button className="sidebar-btn" onClick={() => setActiveMenu("dashboard")}>
+       DASHBOARD
+      </button>
+
       <button className="sidebar-btn" onClick={() => setManageOpen(!manageOpen)}>
         MANAGE ▾
       </button>
@@ -24,7 +28,7 @@ const Sidebar = ({ setActiveMenu }) => {
       </button>
       {villaOpen && (
         <div className="dropdown">
-          <div onClick={() => setActiveMenu("villa")}>Daftar Villa</div>
+          <div onClick={() => setActiveMenu("villaList")}>Daftar Villa</div>
           <div onClick={() => setActiveMenu("updateVilla")}>Update Villa</div>
         </div>
       )}
