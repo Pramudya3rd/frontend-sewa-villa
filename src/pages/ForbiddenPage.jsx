@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import ErrorPage from "./ErrorPage"; 
+import ErrorPage from "../components/Error"; 
 
 const ForbiddenPage = () => {
   return (

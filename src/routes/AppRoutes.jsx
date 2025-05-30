@@ -16,8 +16,7 @@ import ForgotPasswordPage from '../pages/ForgotPassword';
 import ResetPassword from '../pages/ResetPassword';
 import PasswordUpdated from "../pages/PasswordUpdated";
 import ProfilePage from "../pages/ProfilePage";
-import AdminPage from "../pages/AdminPage";
-import OwnerDashboard from "../pages/OwnerPage";
+import Owner from "../pages/Owner";
 import AddVilla from "../pages/AddVilla"
 import ViewVilla from "../pages/ViewVilla"
 import EditVilla from "../pages/EditVilla"
@@ -45,8 +44,7 @@ export default function AppRoutes() {
       <Route path="/booking" element={<Booking />} />
       <Route path="/register" element={<Register />} />
       <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/admin" element={<AdminPage />} />
-      <Route path="/owner" element={<OwnerDashboard />} />
+      <Route path="/owner-page" element={<Owner/>} />
       <Route path="/add-villa" element={<AddVilla />} />
       <Route path="/view-villa" element={<ViewVilla />} />
       <Route path="/edit-villa" element={<EditVilla />} />

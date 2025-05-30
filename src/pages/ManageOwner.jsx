@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Sidebar from "../components/SideBar";
+import Sidebar from "../components/SidebarAdmin";
 import "../styles/SideBar.css";
 
 const dummyOwner = [
