@@ -24,7 +24,7 @@ const Sidebar = ({ setActiveMenu }) => {
       </button>
       {villaOpen && (
         <div className="dropdown">
-          <div onClick={() => setActiveMenu("villa")}>Daftar Villa</div>
+          <div onClick={() => setActiveMenu("villaList")}>Daftar Villa</div>
           <div onClick={() => setActiveMenu("updateVilla")}>Update Villa</div>
         </div>
       )}
