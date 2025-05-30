@@ -86,7 +86,7 @@ const Admin = () => {
 
         {activeMenu === "owner" && (
           <div className="user-table">
-            <h4>OWNER</h4>
+            <h4>OWNER VILLA</h4>
             <table>
               <thead>
                 <tr>
