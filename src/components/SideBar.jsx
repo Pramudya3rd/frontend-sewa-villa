@@ -9,6 +9,10 @@ const Sidebar = ({ setActiveMenu }) => {
     <div className="sidebar">
       <div className="logo">LOGO</div>
 
+      <button className="sidebar-btn" onClick={() => setActiveMenu("dashboard")}>
+       DASHBOARD
+      </button>
+
       <button className="sidebar-btn" onClick={() => setManageOpen(!manageOpen)}>
         MANAGE ▾
       </button>

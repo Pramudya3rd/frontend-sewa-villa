@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/SideBar";
-import ListVilla from "../components/ListVilla";
 import VillaCard from "../components/VillaCard";
 import "../styles/SideBar.css";
 
@@ -30,7 +29,7 @@ const villas = [
 ];
 
 const Admin = () => {
-  const [activeMenu, setActiveMenu] = useState(""); 
+  const [activeMenu, setActiveMenu] = useState("dashboard"); // default ke dashboard
   const navigate = useNavigate();
 
   const handleApprove = (villaName) => {
@@ -46,7 +45,7 @@ const Admin = () => {
       <Sidebar setActiveMenu={setActiveMenu} />
 
       <div className="content-area">
-        {activeMenu === "" && (
+        {activeMenu === "dashboard" && (
           <div className="welcome-message">
             <h2>Welcome Admin</h2>
           </div>

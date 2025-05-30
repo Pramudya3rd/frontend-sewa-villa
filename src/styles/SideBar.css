@@ -18,6 +18,9 @@ body {
   padding: 20px 10px;
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
+  justify-content: center; /* horizontal center */
+  align-items: center;     /* vertical center */
+  text-align: center;
 }
 
 .logo {
@@ -35,6 +38,9 @@ body {
   background-color: white;
   cursor: pointer;
   text-align: center;
+  display: flex;
+  justify-content: center; /* horizontal center */
+  align-items: center;     /* vertical center */
 }
 
 .sidebar-btn.logout {
@@ -136,4 +142,8 @@ body {
   padding: 6px 16px;
   border-radius: 999px;
   cursor: pointer;
+}
+
+.center-heading {
+  text-align: center;
 }
