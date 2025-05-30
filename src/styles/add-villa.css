@@ -1,3 +1,41 @@
+.add-villa-header {
+  background-color: #cfdfea;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  position: relative;
+}
+
+.left-section {
+  display: flex;
+  align-items: center;
+}
+
+.back-button {
+  font-size: 20px;
+  font-weight: bold;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #2c3e50;
+  padding: 6px 6px;
+  transition: background 0.2s ease-in-out;
+}
+
+.back-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.center-section {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: bold;
+  font-size: 14px;
+  color: #2c3e50;
+}
+
 .add-villa-container {
   display: flex;
   justify-content: center;
@@ -148,4 +186,3 @@
   width: 100%;
   padding: 12px;
 }
-
