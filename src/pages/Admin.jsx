@@ -28,6 +28,13 @@ const villas = [
   { title: 'Samudra Biru Tropika', location: 'Ubud, Bali', price: 'Rp. 4.500.000/Night', image: 'http://i.pinimg.com/736x/28/a8/8d/28a88d79127329f7f6cb7be2a18ad2f0.jpg' },
 ];
 
+const dummyBooking = [
+  { name: "Grand Barca Nirwana", email: "Yogyakarta", phone: "Arya Manurung", address: "Jl Bandung, Jawa Barat", title: 'De Santika Nirwana', checkin: "30-05-2025", checkout: "01-06-2025", price: "Rp. 5.000.000", status: "Booked"},
+  { name: "Grand Barca Nirwana", email: "Yogyakarta", phone: "Arya Manurung", address: "Jl Bandung, Jawa Barat", title: 'De Santika Nirwana', checkin: "30-05-2025", checkout: "01-06-2025", price: "Rp. 5.000.000", status: "Pending" },
+  { name: "Grand Barca Nirwana", email: "Yogyakarta", phone: "Arya Manurung", address: "Jl Bandung, Jawa Barat", title: 'De Santika Nirwana', checkin: "30-05-2025", checkout: "01-06-2025", price: "Rp. 5.000.000", status: "Cancel" },
+];
+
+
 const Admin = () => {
   const [activeMenu, setActiveMenu] = useState("dashboard"); // default ke dashboard
   const navigate = useNavigate();
@@ -47,7 +54,7 @@ const Admin = () => {
       <div className="content-area">
         {activeMenu === "dashboard" && (
           <div className="welcome-message">
-            <h2>Welcome Admin</h2>
+            <h2>Welcome, Admin</h2>
           </div>
         )}
 
@@ -149,6 +156,42 @@ const Admin = () => {
             </div>
           </div>
         )}
+
+         {activeMenu === "booking" && (
+        <div className="user-table">
+          <h4>LIST BOOKING</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Villa</th>
+                <th>Check-in</th>
+                <th>Check-Out</th>
+                <th>Price</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {dummyBooking.map((booking, index) => (
+                <tr key={index}>
+                  <td>{booking.name}</td>
+                  <td>{booking.email}</td>
+                  <td>{booking.phone}</td>
+                  <td>{booking.address}</td> {/* ← Perlu ditambahkan ini */}
+                  <td>{booking.title}</td>
+                  <td>{booking.checkin}</td>
+                  <td>{booking.checkout}</td>
+                  <td>{booking.price}</td>
+                  <td>{booking.status}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
       </div>
     </div>
   );
