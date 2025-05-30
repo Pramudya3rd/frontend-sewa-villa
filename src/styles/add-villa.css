@@ -36,20 +36,6 @@
   color: #2c3e50;
 }
 
-.right-section {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.profile-icon {
-  background-color: #fff;
-  border-radius: 50%;
-  padding: 6px;
-  font-size: 14px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
 .add-villa-container {
   display: flex;
   justify-content: center;

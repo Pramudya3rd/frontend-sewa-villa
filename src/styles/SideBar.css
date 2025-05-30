@@ -14,14 +14,14 @@ body {
   background-color: #C7D9E5;
   display: flex;
   flex-direction: column;
-  align-items: center;
   padding: 20px 10px;
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
-  justify-content: center; /* horizontal center */
-  align-items: center;     /* vertical center */
+  justify-content: flex-start; 
+  align-items: center;       
   text-align: center;
 }
+
 
 .logo {
   font-weight: bold;
@@ -38,7 +38,6 @@ body {
   background-color: white;
   cursor: pointer;
   text-align: center;
-<<<<<<< HEAD
   transition: background-color 0.3s, color 0.3s;
 }
 
@@ -52,21 +51,6 @@ body {
   background-color: #2F4157;
   color: white;
   border-color: #2F4157;
-}
-
-.sidebar-btn.logout:hover {
-  background-color: #ef4444; 
-  color: white;
-  border-color: #ef4444;
-=======
-  display: flex;
-  justify-content: center; /* horizontal center */
-  align-items: center;     /* vertical center */
->>>>>>> 29691807b9da07c1c720c508b9a222c45f573b0b
-}
-
-.sidebar-btn.logout {
-  margin-top: auto;
 }
 
 .dropdown {

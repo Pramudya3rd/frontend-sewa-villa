@@ -20,9 +20,6 @@ const AddVillaHeader = () => {
       <div className="center-section">
         <div className="role">ADD VILLA</div>
       </div>
-      <div className="right-section">
-        <div className="profile-icon">👤</div>
-      </div>
     </header>
   );
 };
