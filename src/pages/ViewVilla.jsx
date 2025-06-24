@@ -1,63 +1,118 @@
-import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import ViewVillaHeader from "../components/ViewVilla/ViewHeader";
 import VillaImages from "../components/ViewVilla/VillaImages";
 import VillaDetails from "../components/ViewVilla/VillaDetails";
 import "../styles/view-villa.css";
+import api from "../api/axios";
 
 const ViewVilla = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [villa, setVilla] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const {
-    title = "De Santika Nirwana",
-    location: loc = "Ubud, Bali",
-    price = 5000000,
-    image = 'https://i.pinimg.com/736x/89/c1/df/89c1dfaf3e2bf035718cf2a76a16fd38.jpg',
-    description = "Villa eksklusif dengan fasilitas premium...",
-    guests = 6,
-    area = "24m²",
-    bedType = "One King Bed",
-    features = ["TV", "Free Wifi", "Air Conditioner", "Heater", "Private Bathroom"]
-  } = location.state || {};
+  const villaId = location.state?.id;
 
-  const roomImages = [
-    'https://i.pinimg.com/736x/a8/bc/50/a8bc50298db283746524f3c82bbd9465.jpg',
-    'https://i.pinimg.com/736x/79/0b/56/790b56d61da6b4b2bd1301da3385b085.jpg',
-    'https://i.pinimg.com/736x/47/96/a1/4796a1d06f323c31fd2c7407c43788b9.jpg'
-  ];
+  useEffect(() => {
+    if (!villaId) {
+      setError("ID Villa tidak ditemukan. Mengarahkan kembali...");
+      setLoading(false);
+      setTimeout(() => navigate(-1), 2000);
+      return;
+    }
+
+    const fetchVillaDetails = async () => {
+      try {
+        const response = await api.get(`/villas/${villaId}`);
+        setVilla(response.data.data);
+      } catch (err) {
+        setError(err.response?.data?.message || "Gagal memuat detail villa.");
+        setTimeout(() => navigate(-1), 3000);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchVillaDetails();
+  }, [villaId, navigate]);
+
+  if (loading) {
+    return (
+      <div
+        className="d-flex justify-content-center align-items-center"
+        style={{ minHeight: "80vh" }}
+      >
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Memuat...</span>
+        </div>
+        <p className="ms-3">Memuat detail villa...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="alert alert-danger text-center my-5" role="alert">
+        {error}
+      </div>
+    );
+  }
+
+  if (!villa) {
+    return <div className="text-center my-5">Detail villa tidak tersedia.</div>;
+  }
 
   const handleEdit = () => {
-    navigate('/edit-villa', {
-      state: {
-        title,
-        location: loc,
-        price,
-        image,
-        description,
-        guests,
-        area,
-        bedType,
-        features
-      }
-    });
+    navigate("/edit-villa", { state: { id: villa.id } });
   };
+
+  const {
+    name,
+    location: villaLocation,
+    pricePerNight,
+    mainImage,
+    description,
+    features,
+    guestCapacity,
+    size,
+    bedType,
+  } = villa;
+
+  // Fungsi untuk mengubah string JSON (jika ada) menjadi array
+  const parseJsonString = (jsonString) => {
+    if (typeof jsonString === "string") {
+      try {
+        return JSON.parse(jsonString);
+      } catch (e) {
+        return [];
+      }
+    }
+    return Array.isArray(jsonString) ? jsonString : [];
+  };
+
+  const parsedFeatures = parseJsonString(features);
 
   return (
     <>
       <ViewVillaHeader />
-
       <div className="container py-5">
         <div className="row g-5">
-          <VillaImages mainImage={image} title={title} roomImages={roomImages} />
+          <VillaImages
+            // Menggunakan URL `mainImage` langsung dari API
+            mainImage={mainImage || ""}
+            title={name}
+            // Array untuk gambar tambahan dikosongkan
+            roomImages={[]}
+          />
           <VillaDetails
-            title={title}
-            location={loc}
-            price={price}
+            title={name}
+            location={villaLocation}
+            price={pricePerNight}
             description={description}
-            features={features}
-            guests={guests}
-            area={area}
+            features={parsedFeatures}
+            guestCapacity={guestCapacity}
+            size={size}
             bedType={bedType}
             onEdit={handleEdit}
           />

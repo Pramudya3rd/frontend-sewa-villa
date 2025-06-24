@@ -1,37 +1,66 @@
-import React from 'react';
-import VillaCard from './VillaCard';
+// src/components/MostViewed.jsx
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import VillaCard from "./VillaCard";
+import api from "../api/axios";
 
-const villas = [
-  {
-    title: 'De Santika Nirwana',
-    location: 'Ubud, Bali',
-    price: 'Rp. 5.000.000 / Night',
-    image: 'https://i.pinimg.com/736x/89/c1/df/89c1dfaf3e2bf035718cf2a76a16fd38.jpg'
-  },
-  {
-    title: 'Grand Lavanya Hills',
-    location: 'Ubud, Bali',
-    price: 'Rp. 8.500.000 / Night',
-    image: 'https://i.pinimg.com/736x/b3/1d/ac/b31dac2e3bf41b30d84f5e454e293b13.jpg'
-  },
-  {
-    title: 'Samudra Biru Tropika',
-    location: 'Ubud, Bali',
-    price: 'Rp. 4.500.000 / Night',
-    image: 'http://i.pinimg.com/736x/28/a8/8d/28a88d79127329f7f6cb7be2a18ad2f0.jpg'
+const MostViewed = () => {
+  const navigate = useNavigate();
+  const [villas, setVillas] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchVillas = async () => {
+      try {
+        const response = await api.get("/villas");
+        setVillas(response.data.data);
+      } catch (err) {
+        console.error("Error fetching most viewed villas:", err);
+        setError("Gagal memuat villa terpopuler.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchVillas();
+  }, []);
+
+  if (loading) {
+    return <div className="text-center my-5">Memuat villa terpopuler...</div>;
   }
-];
 
-const MostViewed = () => (
-  <section className="container pb-5">
-    <h2 className="section-title">MOST VIEWED</h2>
-    <p className="section-subtitle">Discover our top-rated villas by our guests</p>
-    <div className="row g-4 justify-content-center">
-      {villas.map((villa, index) => (
-        <VillaCard key={index} {...villa} />
-      ))}
-    </div>
-  </section>
-);
+  if (error) {
+    return <div className="alert alert-danger text-center my-5">{error}</div>;
+  }
+
+  if (villas.length === 0) {
+    return (
+      <div className="text-center my-5">Tidak ada villa populer saat ini.</div>
+    );
+  }
+
+  return (
+    <section className="container pb-5">
+      <h2 className="section-title">MOST VIEWED</h2>
+      <p className="section-subtitle">
+        Discover our top-rated villas by our guests
+      </p>
+      <div className="row g-4 justify-content-center">
+        {villas.map((villa) => (
+          <VillaCard
+            key={villa.id}
+            id={villa.id}
+            title={villa.name}
+            location={villa.location}
+            price={villa.pricePerNight}
+            image={villa.mainImage}
+            // Hapus sepenuhnya baris onBookNow={...} di sini
+            // onBookNow={() => navigate("/villa-detail", { state: { ...villa } })} <-- PASTIKAN BARIS INI TIDAK ADA
+          />
+        ))}
+      </div>
+    </section>
+  );
+};
 
 export default MostViewed;
