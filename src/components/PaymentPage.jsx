@@ -109,9 +109,6 @@ const PaymentPage = () => {
           <p className="villa-tagline">THE CHOICE OF FAMILIES</p>
           <h5 className="villa-title">{villaName}</h5>
           <div className="villa-rating">
-            <span className="text-warning">
-              <FaStar /> <FaStar /> <FaStar /> <FaStar /> <FaStar />
-            </span>
             <span className="rating-text">4.9 (20 Review)</span>
           </div>
           <hr />
@@ -120,13 +117,13 @@ const PaymentPage = () => {
               <div key={index}>{feature}</div>
             ))}
             <div>
-              <FaBed /> Beds <strong>{bedType || "N/A"}</strong>
+               Beds <strong>{bedType || "N/A"}</strong>
             </div>
             <div>
-              <FaRulerCombined /> Area <strong>{size || "N/A"}</strong>
+               Area <strong>{size || "N/A"}</strong>
             </div>
             <div>
-              <FaUserFriends /> Guest <strong>{guestCapacity}</strong>
+            Guest <strong>{guestCapacity}</strong>
             </div>
           </div>
           <p className="mt-3 text-muted">

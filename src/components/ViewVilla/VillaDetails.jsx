@@ -27,15 +27,12 @@ const VillaDetails = ({
     <ul className="text-muted mb-3">
       {features && features.map((f, idx) => <li key={idx}>{f}</li>)}
       <li>
-        <FaUserFriends className="me-2" />
         Max Guests: <strong>{guestCapacity}</strong>
       </li>
       <li>
-        <FaRulerCombined className="me-2" />
         Size: <strong>{size}</strong>
       </li>
       <li>
-        <FaBed className="me-2" />
         Bed Type: <strong>{bedType}</strong>
       </li>
     </ul>

@@ -41,10 +41,7 @@ const VillaCard = ({ id, title, location, price, image, onBookNow }) => {
           <p className="text-muted mb-2">{location}</p>
 
           <div className="mb-2">
-            <span className="text-warning">
-              <FaStar /> <FaStar /> <FaStar /> <FaStar /> <FaStar />
-            </span>
-            <small className="text-muted ms-2">4.9 (20 Reviews)</small>
+            <small className="text-muted ms-0">4.9 (20 Reviews)</small>
           </div>
 
           <p className="mb-1 small text-muted">Start From</p>

@@ -239,12 +239,7 @@ const Detail = () => {
         <div className="col-md-6">
           <h3 className="fw-bold">{name}</h3>
           <p className="mb-2">
-            <span className="text-warning">
-              {[...Array(5)].map((_, i) => (
-                <FaStar key={i} />
-              ))}
-            </span>
-            <span className="ms-2">
+            <span className="ms-0">
               4.9 <span className="text-muted">(20 Reviews)</span>
             </span>
           </p>
@@ -267,15 +262,12 @@ const Detail = () => {
               )
             )}
             <div className="col mb-2">
-              <FaUserFriends className="me-2" />
               Max Guests: <strong>{guestCapacity}</strong>
             </div>
             <div className="col mb-2">
-              <FaRulerCombined className="me-2" />
               Size: <strong>{size}</strong>
             </div>
             <div className="col mb-2">
-              <FaBed className="me-2" />
               Bed Type: <strong>{bedType}</strong>
             </div>
           </div>

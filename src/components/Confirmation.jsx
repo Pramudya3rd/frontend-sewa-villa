@@ -128,15 +128,33 @@ const Confirmation = () => {
           alt={villaName}
           className="villa-image"
         />
-        <div className="villa-content">
-          <p className="villa-tagline">THE CHOICE OF FAMILIES</p>
-          <h5 className="villa-title">{villaName}</h5>
-          <p className="mt-3 text-muted">
-            Price: Rp. {parseFloat(pricePerNight).toLocaleString("id-ID")} /
-            Night
-          </p>
-        </div>
-      </div>
+       <div className="villa-content">
+  <p className="villa-tagline">THE CHOICE OF FAMILIES</p>
+  <h5 className="villa-title">{villaName}</h5>
+  <div className="villa-rating">
+    <span className="rating-text">4.9 (20 Review)</span>
+  </div>
+  <hr />
+  <div className="villa-features">
+    {villaDetails?.features?.map((feature, index) => (
+      <div key={index}>{feature}</div>
+    ))}
+    <div>
+      Beds <strong>{villaDetails?.bedType || "N/A"}</strong>
+    </div>
+    <div>
+      Area <strong>{villaDetails?.size || "N/A"}</strong>
+    </div>
+    <div>
+      Guest <strong>{villaDetails?.guestCapacity || "N/A"}</strong>
+    </div>
+  </div>
+  <p className="mt-3 text-muted">
+    Price: Rp. {parseFloat(pricePerNight).toLocaleString("id-ID")} / Night
+  </p>
+</div>
+</div>
+
 
       <div className="reservation-summary">
         <h5 className="form-title">RESERVATION SUMMARY</h5>

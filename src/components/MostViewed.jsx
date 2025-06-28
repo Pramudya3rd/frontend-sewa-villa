@@ -41,11 +41,32 @@ const MostViewed = () => {
 
   return (
     <section className="container pb-5">
-      <h2 className="section-title">MOST VIEWED</h2>
-      <p className="section-subtitle">
-        Discover our top-rated villas by our guests
-      </p>
-      <div className="row g-4 justify-content-center">
+      <div className="text-center mb-3">
+        <h2 className="section-title">MOST VIEWED</h2>
+        <p className="section-subtitle">
+          Discover our top-rated villas by our guests
+        </p>
+      </div>
+
+      <div className="d-flex justify-content-end mb-3">
+        <button
+          className="btn btn-link text-decoration-none"
+          onClick={() => navigate("/our-villa")}
+          style={{
+            fontWeight: "bold",
+            fontSize: "16px",
+            color: "#4B7083", // ← warna biru sesuai gambar
+          }}
+        >
+          View All
+        </button>
+      </div>
+
+      <div
+        className="row g-4 justify-content-center"
+        onClick={() => navigate("/our-villa")}
+        style={{ cursor: "pointer" }}
+      >
         {villas.map((villa) => (
           <VillaCard
             key={villa.id}
@@ -54,8 +75,6 @@ const MostViewed = () => {
             location={villa.location}
             price={villa.pricePerNight}
             image={villa.mainImage}
-            // Hapus sepenuhnya baris onBookNow={...} di sini
-            // onBookNow={() => navigate("/villa-detail", { state: { ...villa } })} <-- PASTIKAN BARIS INI TIDAK ADA
           />
         ))}
       </div>

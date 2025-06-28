@@ -1,35 +1,38 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/SidebarAdmin";
 import VillaCard from "../components/VillaCard";
 import "../styles/SideBar.css";
 import "../styles/admin.css";
 import api from "../api/axios";
-import { FaRegEye } from "react-icons/fa";
+import { FaRegEye, FaUserCircle } from "react-icons/fa";
 
 const Admin = () => {
   const [activeMenu, setActiveMenu] = useState("dashboard");
-  const navigate = useNavigate();
-
   const [users, setUsers] = useState([]);
   const [owners, setOwners] = useState([]);
   const [villasToUpdate, setVillasToUpdate] = useState([]);
   const [allVillas, setAllVillas] = useState([]);
   const [bookings, setBookings] = useState([]);
-
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const profileRef = useRef(null);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
 
   const fetchData = async (endpoint, setter, filterFn = null) => {
     setLoading(true);
     setError(null);
     try {
       const response = await api.get(endpoint);
-      if (filterFn) {
-        setter(response.data.data.filter(filterFn));
-      } else {
-        setter(response.data.data);
-      }
+      setter(filterFn ? response.data.data.filter(filterFn) : response.data.data);
     } catch (err) {
       console.error(`Error fetching data from ${endpoint}:`, err);
       setError(`Gagal memuat data dari ${endpoint}.`);
@@ -40,64 +43,54 @@ const Admin = () => {
   };
 
   useEffect(() => {
-    setLoading(true); // Set loading true for all fetches
     if (activeMenu === "user") {
       fetchData("/users", setUsers, (user) => user.role === "user");
     } else if (activeMenu === "owner") {
-      // Fetch owners and all villas simultaneously
       Promise.all([
-        api
-          .get("/users")
-          .then((res) => res.data.data.filter((user) => user.role === "owner")),
+        api.get("/users").then((res) => res.data.data.filter((user) => user.role === "owner")),
         api.get("/villas").then((res) => res.data.data),
       ])
         .then(([ownerData, villaData]) => {
           setOwners(ownerData);
-          setAllVillas(villaData); // Store all villas to link with owners
-          setLoading(false);
+          setAllVillas(villaData);
         })
         .catch((err) => {
           console.error("Error fetching owner or villa data:", err);
           setError("Gagal memuat data owner atau villa.");
           setOwners([]);
           setAllVillas([]);
-          setLoading(false);
-        });
+        })
+        .finally(() => setLoading(false));
     } else if (activeMenu === "updateVilla") {
-      fetchData(
-        "/villas",
-        setVillasToUpdate,
-        (villa) => villa.status !== "verified"
-      );
+      fetchData("/villas", setVillasToUpdate, (villa) => villa.status !== "verified");
     } else if (activeMenu === "villaList") {
       fetchData("/villas", setAllVillas);
     } else if (activeMenu === "booking") {
       fetchData("/bookings", setBookings);
     } else {
-      setLoading(false); // If no specific menu is active, ensure loading is false
+      setLoading(false);
     }
   }, [activeMenu]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setShowProfileMenu(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleUpdateVillaStatus = async (villaId, newStatus) => {
     try {
       await api.put(`/villas/${villaId}/status`, { status: newStatus });
       alert(`Status villa berhasil diubah menjadi ${newStatus}.`);
-      fetchData(
-        "/villas",
-        setVillasToUpdate,
-        (villa) => villa.status !== "verified"
-      );
+      fetchData("/villas", setVillasToUpdate, (villa) => villa.status !== "verified");
       fetchData("/villas", setAllVillas);
     } catch (err) {
-      console.error(
-        "Error updating villa status:",
-        err.response?.data || err.message
-      );
-      alert(
-        `Gagal mengubah status villa: ${
-          err.response?.data?.message || err.message
-        }`
-      );
+      console.error("Error updating villa status:", err.response?.data || err.message);
+      alert(`Gagal mengubah status villa: ${err.response?.data?.message || err.message}`);
     }
   };
 
@@ -107,15 +100,8 @@ const Admin = () => {
       alert(`Status booking berhasil diubah menjadi ${newStatus}.`);
       fetchData("/bookings", setBookings);
     } catch (err) {
-      console.error(
-        "Error updating booking status:",
-        err.response?.data || err.message
-      );
-      alert(
-        `Gagal mengubah status booking: ${
-          err.response?.data?.message || err.message
-        }`
-      );
+      console.error("Error updating booking status:", err.response?.data || err.message);
+      alert(`Gagal mengubah status booking: ${err.response?.data?.message || err.message}`);
     }
   };
 
@@ -129,11 +115,31 @@ const Admin = () => {
 
       <div className="content-area">
         {activeMenu === "dashboard" && (
-          <div className="welcome-message">
-            <h2>Welcome, Admin</h2>
+          <div className="header d-flex justify-content-between align-items-center mb-3" ref={profileRef}>
+            <h2 className="m-0">Welcome, Admin</h2>
+            <div className="position-relative">
+              <FaUserCircle
+                size={30}
+                className="text-dark cursor-pointer"
+                onClick={() => setShowProfileMenu(!showProfileMenu)}
+                title="Profile"
+              />
+              {showProfileMenu && (
+                <div className="dropdown-menu show position-absolute end-0 mt-2 shadow bg-white rounded py-2">
+                  <button
+                    className="dropdown-item px-4 py-1 text-start"
+                    onClick={handleLogout}
+                    style={{ color: "inherit", fontWeight: "normal" }}
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         )}
 
+        {/* MENU USER */}
         {activeMenu === "user" && (
           <div className="user-table">
             <h4>USER</h4>
@@ -168,6 +174,7 @@ const Admin = () => {
           </div>
         )}
 
+        {/* MENU OWNER */}
         {activeMenu === "owner" && (
           <div className="user-table">
             <h4>OWNER VILLA</h4>
@@ -184,7 +191,7 @@ const Admin = () => {
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
-                    <th>Villa Name(s)</th> {/* Changed to plural */}
+                    <th>Villa Name(s)</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -207,6 +214,7 @@ const Admin = () => {
           </div>
         )}
 
+        {/* UPDATE VILLA */}
         {activeMenu === "updateVilla" && (
           <div className="user-table">
             <h4>UPDATE VILLA</h4>
@@ -215,9 +223,7 @@ const Admin = () => {
             ) : error ? (
               <div className="alert alert-danger text-center">{error}</div>
             ) : villasToUpdate.length === 0 ? (
-              <div className="text-center">
-                Tidak ada villa yang menunggu verifikasi.
-              </div>
+              <div className="text-center">Tidak ada villa yang menunggu verifikasi.</div>
             ) : (
               <table>
                 <thead>
@@ -253,20 +259,10 @@ const Admin = () => {
                         >
                           <FaRegEye />
                         </button>
-                        <button
-                          className="btn-approve"
-                          onClick={() =>
-                            handleUpdateVillaStatus(villa.id, "verified")
-                          }
-                        >
+                        <button className="btn-approve" onClick={() => handleUpdateVillaStatus(villa.id, "verified")}>
                           Approve
                         </button>
-                        <button
-                          className="btn-reject"
-                          onClick={() =>
-                            handleUpdateVillaStatus(villa.id, "rejected")
-                          }
-                        >
+                        <button className="btn-reject" onClick={() => handleUpdateVillaStatus(villa.id, "rejected")}>
                           Reject
                         </button>
                       </td>
@@ -278,6 +274,7 @@ const Admin = () => {
           </div>
         )}
 
+        {/* VILLA LIST */}
         {activeMenu === "villaList" && (
           <div className="villa-list-section">
             <h4>LIST VILLA</h4>
@@ -297,9 +294,7 @@ const Admin = () => {
                     location={villa.location}
                     price={villa.pricePerNight}
                     image={villa.mainImage}
-                    onBookNow={() =>
-                      navigate("/villa-detail", { state: { id: villa.id } })
-                    }
+                    onBookNow={() => navigate("/villa-detail", { state: { id: villa.id } })}
                   />
                 ))}
               </div>
@@ -307,6 +302,7 @@ const Admin = () => {
           </div>
         )}
 
+        {/* BOOKING */}
         {activeMenu === "booking" && (
           <div className="user-table">
             <h4>LIST BOOKING</h4>
@@ -336,24 +332,17 @@ const Admin = () => {
                       <td>{booking.user?.name || "N/A"}</td>
                       <td>{booking.user?.email || "N/A"}</td>
                       <td>{booking.villa?.name || "N/A"}</td>
+                      <td>{new Date(booking.checkInDate).toLocaleDateString()}</td>
+                      <td>{new Date(booking.checkOutDate).toLocaleDateString()}</td>
                       <td>
-                        {new Date(booking.checkInDate).toLocaleDateString()}
-                      </td>
-                      <td>
-                        {new Date(booking.checkOutDate).toLocaleDateString()}
-                      </td>
-                      <td>
-                        Rp.{" "}
-                        {parseFloat(booking.totalPrice).toLocaleString("id-ID")}
+                        Rp. {parseFloat(booking.totalPrice).toLocaleString("id-ID")}
                       </td>
                       <td>{booking.status}</td>
                       <td>
                         {booking.status === "pending" && (
                           <button
                             className="btn btn-sm btn-success me-2"
-                            onClick={() =>
-                              handleUpdateBookingStatus(booking.id, "confirmed")
-                            }
+                            onClick={() => handleUpdateBookingStatus(booking.id, "confirmed")}
                           >
                             Konfirmasi
                           </button>
@@ -361,9 +350,7 @@ const Admin = () => {
                         {booking.status !== "cancelled" && (
                           <button
                             className="btn btn-sm btn-danger"
-                            onClick={() =>
-                              handleUpdateBookingStatus(booking.id, "cancelled")
-                            }
+                            onClick={() => handleUpdateBookingStatus(booking.id, "cancelled")}
                           >
                             Batal
                           </button>
@@ -371,9 +358,7 @@ const Admin = () => {
                         {booking.status === "confirmed" && (
                           <button
                             className="btn btn-sm btn-info"
-                            onClick={() =>
-                              handleUpdateBookingStatus(booking.id, "completed")
-                            }
+                            onClick={() => handleUpdateBookingStatus(booking.id, "completed")}
                           >
                             Selesai
                           </button>
@@ -382,7 +367,7 @@ const Admin = () => {
                     </tr>
                   ))}
                 </tbody>
-              </table>
+              </table> 
             )}
           </div>
         )}

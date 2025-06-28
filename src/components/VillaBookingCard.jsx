@@ -204,9 +204,6 @@ const VillaBookingCard = () => {
           <p className="villa-tagline">THE CHOICE OF FAMILIES</p>
           <h5 className="villa-title">{villaDetails.name}</h5>
           <div className="villa-rating">
-            <span className="text-warning">
-              <FaStar /> <FaStar /> <FaStar /> <FaStar /> <FaStar />
-            </span>
             <span className="rating-text">4.9 (20 Review)</span>
           </div>
           <hr />
@@ -216,14 +213,14 @@ const VillaBookingCard = () => {
                 <div key={index}>{feature}</div>
               ))}
             <div>
-              <FaBed /> Beds <strong>{villaDetails.bedType || "N/A"}</strong>
+             Beds <strong>{villaDetails.bedType || "N/A"}</strong>
             </div>
             <div>
-              <FaRulerCombined /> Area{" "}
+             Area{" "}
               <strong>{villaDetails.size || "N/A"}</strong>
             </div>
             <div>
-              <FaUserFriends /> Guest{" "}
+             Guest{" "}
               <strong>{villaDetails.guestCapacity}</strong>
             </div>
           </div>

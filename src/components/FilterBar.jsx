@@ -1,9 +1,10 @@
+// src/components/FilterBar.jsx
 import React from 'react';
 import { FaSearch } from 'react-icons/fa';
 
 const FilterBar = () => {
   return (
-    <div className="d-flex flex-wrap gap-3 justify-content-center my-4">
+    <div className="d-flex flex-wrap gap-3 justify-content-center mt-4 mb-1">
       {/* Search Input */}
       <div className="input-group rounded-pill border px-3" style={{ maxWidth: '250px' }}>
         <input
@@ -20,9 +21,11 @@ const FilterBar = () => {
       {/* Location Filter */}
       <select className="form-select rounded-pill border px-3" style={{ maxWidth: '150px' }}>
         <option>Location</option>
-        <option>Ubud</option>
-        <option>Canggu</option>
-        <option>Seminyak</option>
+        <option>West Java</option>
+        <option>Central Java</option>
+        <option>East Java</option>
+        <option>Jakarta</option>
+        <option>Bali</option>
       </select>
 
       {/* Price Filter */}
@@ -39,7 +42,6 @@ const FilterBar = () => {
         <option>Lowest First</option>
       </select>
     </div>
-    
   );
 };
 
