@@ -1,17 +1,45 @@
-// src/components/FilterBar.jsx
-import React from 'react';
-import { FaSearch } from 'react-icons/fa';
+import React, { useState, useEffect } from "react";
+import { FaSearch } from "react-icons/fa";
 
-const FilterBar = () => {
+const FilterBar = ({ villas, onFilterChange }) => {
+  const [locations, setLocations] = useState([]);
+  const [filters, setFilters] = useState({
+    search: "", // State baru untuk pencarian
+    location: "",
+    price: "",
+  });
+
+  useEffect(() => {
+    if (villas.length > 0) {
+      const uniqueLocations = [
+        ...new Set(villas.map((villa) => villa.location)),
+      ];
+      setLocations(uniqueLocations);
+    }
+  }, [villas]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    const newFilters = { ...filters, [name]: value };
+    setFilters(newFilters);
+    onFilterChange(newFilters);
+  };
+
   return (
     <div className="d-flex flex-wrap gap-3 justify-content-center mt-4 mb-1">
       {/* Search Input */}
-      <div className="input-group rounded-pill border px-3" style={{ maxWidth: '250px' }}>
+      <div
+        className="input-group rounded-pill border px-3"
+        style={{ maxWidth: "250px" }}
+      >
         <input
           type="text"
+          name="search" // Tambahkan name
           className="form-control border-0"
-          placeholder="Search"
-          style={{ borderRadius: '30px' }}
+          placeholder="Search Villa Name"
+          style={{ borderRadius: "30px" }}
+          value={filters.search}
+          onChange={handleInputChange} // Gunakan handler yang sama
         />
         <span className="input-group-text bg-white border-0">
           <FaSearch />
@@ -19,27 +47,32 @@ const FilterBar = () => {
       </div>
 
       {/* Location Filter */}
-      <select className="form-select rounded-pill border px-3" style={{ maxWidth: '150px' }}>
-        <option>Location</option>
-        <option>West Java</option>
-        <option>Central Java</option>
-        <option>East Java</option>
-        <option>Jakarta</option>
-        <option>Bali</option>
+      <select
+        name="location"
+        className="form-select rounded-pill border px-3"
+        style={{ maxWidth: "150px" }}
+        onChange={handleInputChange}
+        value={filters.location}
+      >
+        <option value="">All Locations</option>
+        {locations.map((location) => (
+          <option key={location} value={location}>
+            {location}
+          </option>
+        ))}
       </select>
 
       {/* Price Filter */}
-      <select className="form-select rounded-pill border px-3" style={{ maxWidth: '150px' }}>
-        <option>Price</option>
+      <select
+        name="price"
+        className="form-select rounded-pill border px-3"
+        style={{ maxWidth: "150px" }}
+        onChange={handleInputChange}
+        value={filters.price}
+      >
+        <option value="">Price</option>
         <option>Lowest to Highest</option>
         <option>Highest to Lowest</option>
-      </select>
-
-      {/* Rating Filter */}
-      <select className="form-select rounded-pill border px-3" style={{ maxWidth: '150px' }}>
-        <option>Rating</option>
-        <option>Highest First</option>
-        <option>Lowest First</option>
       </select>
     </div>
   );

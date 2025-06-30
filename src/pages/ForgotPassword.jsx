@@ -1,7 +1,7 @@
 // src/pages/ForgotPassword.jsx
 import React, { useState } from "react";
 import "../styles/forgot-password.css";
-import api from "../api/axios"; // Import axios instance
+import api from "../api/axios";
 
 const ForgotPasswordPage = () => {
   const [email, setEmail] = useState("");
@@ -9,7 +9,6 @@ const ForgotPasswordPage = () => {
   const [isError, setIsError] = useState(false);
 
   const handleSubmit = async (e) => {
-    // Tambahkan async
     e.preventDefault();
     setMessage("");
     setIsError(false);
@@ -17,11 +16,10 @@ const ForgotPasswordPage = () => {
     if (!email.trim()) {
       setMessage("Email is required.");
       setIsError(true);
-      return; // Hentikan eksekusi jika email kosong
+      return;
     }
 
     try {
-      // Kirim permintaan ke backend
       const response = await api.post("/auth/forgot-password", { email });
       setMessage(
         response.data.message ||
@@ -29,10 +27,6 @@ const ForgotPasswordPage = () => {
       );
       setIsError(false);
     } catch (error) {
-      console.error(
-        "Error sending reset password link:",
-        error.response?.data || error.message
-      );
       setMessage(
         error.response?.data?.message ||
           "Failed to send reset password link. Please try again."
@@ -69,11 +63,11 @@ const ForgotPasswordPage = () => {
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required // Tambahkan required
+              required
             />
           </div>
-          <button type="submit" className="forgot-password-btn">
-            Send
+          <button type="submit" className="btn btn-primary w-100 mt-3">
+            Send Reset Link
           </button>
         </form>
       </div>

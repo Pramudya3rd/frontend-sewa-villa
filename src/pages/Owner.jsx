@@ -5,14 +5,14 @@ import { FaUserCircle } from "react-icons/fa";
 import SidebarOwner from "../components/SidebarOwner";
 import MyVillaTable from "../components/MyVilla/MyVillaTable";
 import "../styles/owner.css";
-import api from "../api/axios"; // Import axios
+import api from "../api/axios";
 
 const Owner = () => {
   const navigate = useNavigate();
   const [activeMenu, setActiveMenu] = useState("dashboard");
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const profileRef = useRef(null);
-  const [bookings, setBookings] = useState([]); // State untuk booking
+  const [bookings, setBookings] = useState([]);
   const [loadingBookings, setLoadingBookings] = useState(true);
   const [errorBookings, setErrorBookings] = useState(null);
 
@@ -26,30 +26,25 @@ const Owner = () => {
     navigate("/login");
   };
 
-  // Fungsi untuk mengambil daftar booking untuk owner
   const fetchOwnerBookings = async () => {
     setLoadingBookings(true);
     setErrorBookings(null);
     try {
-      // Backend akan otomatis memfilter berdasarkan ownerId dari token
       const response = await api.get("/bookings");
       setBookings(response.data.data);
     } catch (err) {
-      console.error("Error fetching owner's bookings:", err);
       setErrorBookings("Gagal memuat daftar pemesanan Anda.");
     } finally {
       setLoadingBookings(false);
     }
   };
 
-  // Efek untuk memuat booking saat menu "booking" aktif
   useEffect(() => {
     if (activeMenu === "booking") {
       fetchOwnerBookings();
     }
-  }, [activeMenu]); // Jalankan ketika activeMenu berubah
+  }, [activeMenu]);
 
-  // Close dropdown jika klik di luar icon dan dropdown
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (profileRef.current && !profileRef.current.contains(event.target)) {
@@ -62,22 +57,13 @@ const Owner = () => {
     };
   }, []);
 
-  // Fungsi untuk mengupdate status booking
   const handleUpdateBookingStatus = async (bookingId, newStatus) => {
     try {
       await api.put(`/bookings/${bookingId}/status`, { status: newStatus });
       alert(`Status booking berhasil diubah menjadi ${newStatus}.`);
-      fetchOwnerBookings(); // Refresh daftar booking setelah update
+      fetchOwnerBookings();
     } catch (err) {
-      console.error(
-        "Error updating booking status:",
-        err.response?.data || err.message
-      );
-      alert(
-        `Gagal mengubah status booking: ${
-          err.response?.data?.message || err.message
-        }`
-      );
+      alert("Gagal mengubah status booking.");
     }
   };
 
