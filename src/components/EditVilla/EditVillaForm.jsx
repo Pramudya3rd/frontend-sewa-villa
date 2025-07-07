@@ -2,9 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/axios";
-import { FaTimesCircle } from "react-icons/fa"; // Import icon silang
+import { FaTimesCircle } from "react-icons/fa"; 
 
-// Get the base URL for static assets from the environment variable
 const backendBaseUrl = import.meta.env.VITE_API_BASE_URL.replace("/api", "");
 
 const EditVillaForm = ({ villaData }) => {
@@ -17,11 +16,10 @@ const EditVillaForm = ({ villaData }) => {
     pricePerNight: "",
     size: "",
     bedType: "",
-    mainImage: "", // This will still hold the relative path string for main image
-    mainImageFile: null, // This will hold the File object for a new main image
+    mainImage: "", 
+    mainImageFile: null, 
   });
 
-  // State baru untuk mengelola semua gambar tambahan (URL lama dan file baru)
   const [additionalImagesData, setAdditionalImagesData] = useState([]);
   const [previewMainImage, setPreviewMainImage] = useState(null);
 

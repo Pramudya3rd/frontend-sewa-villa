@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import "../styles/VillaBookingCard.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FaStar, FaBed, FaRulerCombined, FaUserFriends } from "react-icons/fa";
-import api from "../api/axios"; // Pastikan ini diimpor dengan benar. BACKEND_URL tidak perlu diimpor dari sini, karena axios sudah menggunakannya di config base URL.
+import api from "../api/axios"; 
 
 const VillaBookingCard = () => {
   const navigate = useNavigate();

@@ -339,6 +339,13 @@ const Admin = () => {
                       </td>
                       <td>{booking.status}</td>
                       <td>
+                        <button
+                          className="btn btn-sm btn-secondary me-2"
+                          onClick={() => navigate("/view-payment", { state: { bookingId: booking.id } })}
+                        >
+                          Lihat Pembayaran
+                        </button>
+
                         {booking.status === "pending" && (
                           <button
                             className="btn btn-sm btn-success me-2"
@@ -349,7 +356,7 @@ const Admin = () => {
                         )}
                         {booking.status !== "cancelled" && (
                           <button
-                            className="btn btn-sm btn-danger"
+                            className="btn btn-sm btn-danger me-2"
                             onClick={() => handleUpdateBookingStatus(booking.id, "cancelled")}
                           >
                             Batal
@@ -367,7 +374,7 @@ const Admin = () => {
                     </tr>
                   ))}
                 </tbody>
-              </table> 
+              </table>
             )}
           </div>
         )}

@@ -1,4 +1,3 @@
-// src/pages/Owner.jsx
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
@@ -81,7 +80,6 @@ const Owner = () => {
             onClick={() => setShowProfileMenu(!showProfileMenu)}
             title="Profile"
           />
-
           {showProfileMenu && (
             <div className="dropdown-menu show position-absolute end-0 mt-0 shadow bg-white rounded py-2">
               <button
@@ -106,7 +104,7 @@ const Owner = () => {
             <button className="add-villa-btn" onClick={handleAddVilla}>
               Add Villa
             </button>
-            <MyVillaTable /> {/* MyVillaTable akan fetch datanya sendiri */}
+            <MyVillaTable />
           </div>
         )}
 
@@ -114,25 +112,22 @@ const Owner = () => {
           <div className="booking-section">
             <h3>Booking List</h3>
             {loadingBookings ? (
-              <div className="text-center">Memuat pemesanan...</div>
+              <div className="text-center">Memuat daftar booking...</div>
             ) : errorBookings ? (
               <div className="alert alert-danger text-center">
                 {errorBookings}
               </div>
             ) : bookings.length === 0 ? (
-              <div className="text-center">
-                Tidak ada pemesanan untuk villa Anda.
-              </div>
+              <div className="text-center">Tidak ada booking.</div>
             ) : (
               <table>
                 <thead>
                   <tr>
                     <th>Nama Pengguna</th>
                     <th>Email Pengguna</th>
-                    <th>Telepon Pengguna</th>
                     <th>Villa</th>
                     <th>Check-in</th>
-                    <th>Check-out</th>
+                    <th>Check-Out</th>
                     <th>Harga Total</th>
                     <th>Status</th>
                     <th>Aksi</th>
@@ -141,10 +136,9 @@ const Owner = () => {
                 <tbody>
                   {bookings.map((booking) => (
                     <tr key={booking.id}>
-                      <td>{booking.user.name}</td>
-                      <td>{booking.user.email}</td>
-                      <td>{booking.user.phone}</td>
-                      <td>{booking.villa.name}</td>
+                      <td>{booking.user?.name || "N/A"}</td>
+                      <td>{booking.user?.email || "N/A"}</td>
+                      <td>{booking.villa?.name || "N/A"}</td>
                       <td>
                         {new Date(booking.checkInDate).toLocaleDateString()}
                       </td>
@@ -157,24 +151,56 @@ const Owner = () => {
                       </td>
                       <td>{booking.status}</td>
                       <td>
+                        <button
+                          className="btn btn-sm btn-secondary me-2"
+                          onClick={() =>
+                            navigate("/view-payment", {
+                              state: { bookingId: booking.id },
+                            })
+                          }
+                        >
+                          Lihat Pembayaran
+                        </button>
+
                         {booking.status === "pending" && (
                           <button
                             className="btn btn-sm btn-success me-2"
                             onClick={() =>
-                              handleUpdateBookingStatus(booking.id, "confirmed")
+                              handleUpdateBookingStatus(
+                                booking.id,
+                                "confirmed"
+                              )
                             }
                           >
                             Konfirmasi
                           </button>
                         )}
+
                         {booking.status !== "cancelled" && (
                           <button
-                            className="btn btn-sm btn-danger"
+                            className="btn btn-sm btn-danger me-2"
                             onClick={() =>
-                              handleUpdateBookingStatus(booking.id, "cancelled")
+                              handleUpdateBookingStatus(
+                                booking.id,
+                                "cancelled"
+                              )
                             }
                           >
                             Batal
+                          </button>
+                        )}
+
+                        {booking.status === "confirmed" && (
+                          <button
+                            className="btn btn-sm btn-info"
+                            onClick={() =>
+                              handleUpdateBookingStatus(
+                                booking.id,
+                                "completed"
+                              )
+                            }
+                          >
+                            Selesai
                           </button>
                         )}
                       </td>

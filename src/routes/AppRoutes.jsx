@@ -20,6 +20,7 @@ import Owner from "../pages/Owner";
 import AddVilla from "../pages/AddVilla";
 import ViewVilla from "../pages/ViewVilla";
 import EditVilla from "../pages/EditVilla";
+import ViewPayment from "../pages/viewPayment";
 import NotFoundPage from "../pages/NotFoundPage";
 import ForbiddenPage from "../pages/ForbiddenPage";
 import Admin from "../pages/Admin";
@@ -46,6 +47,7 @@ export default function AppRoutes() {
       <Route path="/add-villa" element={<AddVilla />} />
       <Route path="/view-villa" element={<ViewVilla />} />
       <Route path="/edit-villa" element={<EditVilla />} />
+      <Route path="/view-payment" element={<ViewPayment />} />
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/password-updated" element={<PasswordUpdated />} />
