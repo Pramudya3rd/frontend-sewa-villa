@@ -40,10 +40,6 @@ const Confirmation = () => {
     }
   };
 
-  const handleUploadClick = () => {
-    fileInputRef.current.click();
-  };
-
   const handleConfirmation = async () => {
     setMessage("");
     setIsError(false);
@@ -128,33 +124,33 @@ const Confirmation = () => {
           alt={villaName}
           className="villa-image"
         />
-       <div className="villa-content">
-  <p className="villa-tagline">THE CHOICE OF FAMILIES</p>
-  <h5 className="villa-title">{villaName}</h5>
-  <div className="villa-rating">
-    <span className="rating-text">4.9 (20 Review)</span>
-  </div>
-  <hr />
-  <div className="villa-features">
-    {villaDetails?.features?.map((feature, index) => (
-      <div key={index}>{feature}</div>
-    ))}
-    <div>
-      Beds <strong>{villaDetails?.bedType || "N/A"}</strong>
-    </div>
-    <div>
-      Area <strong>{villaDetails?.size || "N/A"}</strong>
-    </div>
-    <div>
-      Guest <strong>{villaDetails?.guestCapacity || "N/A"}</strong>
-    </div>
-  </div>
-  <p className="mt-3 text-muted">
-    Price: Rp. {parseFloat(pricePerNight).toLocaleString("id-ID")} / Night
-  </p>
-</div>
-</div>
-
+        <div className="villa-content">
+          <p className="villa-tagline">THE CHOICE OF FAMILIES</p>
+          <h5 className="villa-title">{villaName}</h5>
+          <div className="villa-rating">
+            <span className="rating-text">4.9 (20 Review)</span>
+          </div>
+          <hr />
+          <div className="villa-features">
+            {villaDetails?.features?.map((feature, index) => (
+              <div key={index}>{feature}</div>
+            ))}
+            <div>
+              Beds <strong>{villaDetails?.bedType || "N/A"}</strong>
+            </div>
+            <div>
+              Area <strong>{villaDetails?.size || "N/A"}</strong>
+            </div>
+            <div>
+              Guest <strong>{villaDetails?.guestCapacity || "N/A"}</strong>
+            </div>
+          </div>
+          <p className="mt-3 text-muted">
+            Price: Rp. {parseFloat(pricePerNight).toLocaleString("id-ID")} /
+            Night
+          </p>
+        </div>
+      </div>
 
       <div className="reservation-summary">
         <h5 className="form-title">RESERVATION SUMMARY</h5>
@@ -218,7 +214,12 @@ const Confirmation = () => {
           <p>
             <strong>UPLOAD FILE PAYMENT</strong>
           </p>
-          <div className="upload-box" onClick={handleUploadClick}>
+          <label
+            className="upload-box"
+            style={{
+              cursor: fileName === "Choose File" ? "pointer" : "default",
+            }}
+          >
             <FaCloudUploadAlt className="upload-icon" />
             <span className="upload-text">
               {fileName === "Choose File"
@@ -226,7 +227,21 @@ const Confirmation = () => {
                 : fileName}
             </span>
             {fileName !== "Choose File" && (
-              <span className="selected-file-name">{fileName}</span>
+              <>
+                <span className="selected-file-name">{fileName}</span>
+                <button
+                  type="button"
+                  className="btn btn-link btn-sm ms-2"
+                  style={{ padding: 0 }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setPaymentProofFile(null);
+                    setFileName("Choose File");
+                  }}
+                >
+                  Ganti File
+                </button>
+              </>
             )}
             <input
               type="file"
@@ -234,8 +249,10 @@ const Confirmation = () => {
               ref={fileInputRef}
               onChange={handleFileChange}
               accept="image/*"
+              style={{ display: "none" }}
+              disabled={fileName !== "Choose File"}
             />
-          </div>
+          </label>
         </div>
 
         <button className="confirmation-button" onClick={handleConfirmation}>

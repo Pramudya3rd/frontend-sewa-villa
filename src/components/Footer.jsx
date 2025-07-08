@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import logo from "../assets/logo-kamar-tamu.png";
 
 const Footer = () => {
   const aboutLinks = [
@@ -19,7 +20,7 @@ const Footer = () => {
     <footer className="text-md-start">
       <div className="row">
         <div className="col-md-4 mb-4 text-center">
-          <h5>LOGO</h5>
+          <img src={logo} alt="Logo" style={{ height: "75px" }} />
           <p>Your trusted partner for luxury stays in Bali's best villas.</p>
           <div className="footer-social">
             <a

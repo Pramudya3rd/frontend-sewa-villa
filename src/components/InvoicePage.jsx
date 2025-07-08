@@ -168,7 +168,7 @@ const InvoicePage = () => {
             <div className="mt-4">
               <h6 className="fw-bold">Payment Proof:</h6>
               <img
-                src={`<span class="math-inline">\{backendBaseUrl\}</span>{paymentProof}`} // <-- Menggunakan URL dari backend
+                src={`${backendBaseUrl}${paymentProof}`}
                 alt="Payment Proof"
                 style={{
                   maxWidth: "100%",

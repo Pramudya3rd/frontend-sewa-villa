@@ -188,7 +188,6 @@ const RegisterPage = () => {
                 <option value="">Select role</option>
                 <option value="user">User</option>
                 <option value="owner">Owner</option>
-                <option value="admin">Admin</option>
               </select>
             </div>
 
