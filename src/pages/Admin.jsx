@@ -276,31 +276,41 @@ const Admin = () => {
 
         {/* VILLA LIST */}
         {activeMenu === "villaList" && (
-          <div className="villa-list-section">
-            <h4>LIST VILLA</h4>
-            {loading ? (
-              <div className="text-center">Memuat daftar villa...</div>
-            ) : error ? (
-              <div className="alert alert-danger text-center">{error}</div>
-            ) : allVillas.length === 0 ? (
-              <div className="text-center">Tidak ada villa terdaftar.</div>
-            ) : (
-              <div className="row g-4 justify-content-center">
-                {allVillas.map((villa) => (
-                  <VillaCard
-                    key={villa.id}
-                    id={villa.id}
-                    title={villa.name}
-                    location={villa.location}
-                    price={villa.pricePerNight}
-                    image={villa.mainImage}
-                    onBookNow={() => navigate("/villa-detail", { state: { id: villa.id } })}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-        )}
+            <div className="user-table">
+              <h4>LIST VILLA</h4>
+              {loading ? (
+                <div className="text-center">Memuat daftar villa...</div>
+              ) : error ? (
+                <div className="alert alert-danger text-center">{error}</div>
+              ) : allVillas.length === 0 ? (
+                <div className="text-center">Tidak ada villa terdaftar.</div>
+              ) : (
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Nama Villa</th>
+                      <th>Alamat</th>
+                      <th>Harga / Malam</th>
+                      <th>Status</th>
+                      <th>Owner</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {allVillas.map((villa) => (
+                      <tr key={villa.id}>
+                        <td>{villa.name}</td>
+                        <td>{villa.location}</td>
+                        <td>Rp. {parseFloat(villa.pricePerNight).toLocaleString("id-ID")}</td>
+                        <td>{villa.status}</td>
+                        <td>{villa.owner?.name || "N/A"}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
+            </div>
+          )}
+
 
         {/* BOOKING */}
         {activeMenu === "booking" && (
